@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe game</title>
+
+  <link rel='stylesheet prefetch' href='https://getbootstrap.com/2.3.2/assets/css/bootstrap.css'>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-2">
+      &nbsp;
+    </div>
+    <div class="col-md-auto">
+      <h1>Tic Tac Toe</h1>
+    </div>
+    <div class="col col-lg-2">
+      &nbsp;
+    </div>
+  </div>
+
+  <div ng-app="app" ng-controller="TicTacToeCtrl">
+    <form>
+     <div class="form-group">
+      <label for="exampleFormControlSelect1">Board Size</label>
+       <select ng-model="game.grid_size" ng-options="option.value as option.label for option in grid_options" ng-change="game.init()"></select>
+     </div>
+    </form>
+    <hr>
+    <div class="row">
+       <div class="col-md-auto">
+      <h3>Scoreboard</h3>
+      
+    </div>
+    </div>
+  <table id="scoreboard" align="center">
+    <tr>
+      <td> Player 1</td>
+      <td width="200"></td>
+      <td> Player 2 </td>
+    </tr>
+    <tr>
+      <td class="score" id="player1"> 
+        {{game.scores.X}}
+      </td>
+      <td> &nbsp; </td>
+      <td class="score" id="player2">
+        {{game.scores.O}}
+      </td>
+    </tr>
+  </table>
+  <hr>  
+
+  <table align="center" id="tic-tac-toe">
+    <tr ng-repeat="(row_index, row) in game.dummyArray track by $index">
+      <td ng-repeat="(column_index, column) in game.dummyArray track by $index" 
+          ng-click="game.mark(row_index, column_index)"
+          class="{{game.data[row_index+''+column_index]}}">
+        {{game.data[row_index+''+column_index]}}
+      </td>
+    </tr>
+  </table>
+
+  <button type="button" class="btn btn-success btn-md" ng-click="game.init()">Reset</button>
+
+</div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js'></script>
+<script  src="js/index.js"></script>
+</body>
+</html>
